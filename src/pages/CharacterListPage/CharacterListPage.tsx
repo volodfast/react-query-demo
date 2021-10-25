@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 // styles
-import { CharacterListPageContainer } from './CharacterList.styled';
+import { CharacterListPageContainer } from './CharacterListPage.styled';
 
 const CharacterListPage: FC = () => {
   return (

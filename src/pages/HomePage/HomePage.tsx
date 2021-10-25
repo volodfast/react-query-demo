@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 // styles
-import { HomePageContainer } from './Home.styled';
+import { HomePageContainer } from './HomePage.styled';
 
 const HomePage: FC = () => {
   return <HomePageContainer>Home page</HomePageContainer>;
