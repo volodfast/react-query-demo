@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
+import queryString from 'query-string';
+import { useHistory, useLocation } from 'react-router';
 // components
 import CharacterList from 'modules/characters/components/CharacterList';
 // hooks
@@ -7,7 +9,39 @@ import { useCharacterList } from 'modules/characters/hooks/useCharacterList';
 import { CharacterListPageContainer } from './CharacterListPage.styled';
 
 const CharacterListPage: FC = () => {
-  const { isLoading, isError, data } = useCharacterList();
+  const { pathname, search } = useLocation();
+  const history = useHistory();
+
+  const parsed = queryString.parse(search);
+  const page: number = parseInt(parsed.page as string) || 1;
+
+  const { isLoading, isError, data } = useCharacterList({ page });
+
+  const handleClickPrev = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.preventDefault();
+
+    const search = queryString.stringify({
+      page: page - 1,
+    });
+
+    history.push({
+      pathname: pathname,
+      search,
+    });
+  };
+
+  const handleClickNext = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.preventDefault();
+
+    const search = queryString.stringify({
+      page: page + 1,
+    });
+
+    history.push({
+      pathname: pathname,
+      search,
+    });
+  };
 
   return (
     <CharacterListPageContainer>
@@ -17,7 +51,17 @@ const CharacterListPage: FC = () => {
       ) : isError ? (
         'There is an error! Try again later!'
       ) : data ? (
-        <CharacterList list={data.results} />
+        <div>
+          <CharacterList list={data.results} />
+          <div>
+            <button onClick={handleClickPrev} disabled={!data.info.prev}>
+              Prev
+            </button>
+            <button onClick={handleClickNext} disabled={!data.info.next}>
+              Next
+            </button>
+          </div>
+        </div>
       ) : null}
     </CharacterListPageContainer>
   );
