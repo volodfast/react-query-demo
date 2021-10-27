@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Header from 'modules/core/components/Header';
 import CharacterListPage from 'pages/CharacterListPage';
 import HomePage from 'pages/HomePage';
+import CharacterShowPage from 'pages/CharacterShowPage';
 
 const client = new QueryClient();
 
@@ -17,8 +18,11 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Route path="/characters">
+          <Route path="/characters" exact>
             <CharacterListPage />
+          </Route>
+          <Route path="/characters/:id" exact>
+            <CharacterShowPage />
           </Route>
         </Switch>
         <ReactQueryDevtools />
