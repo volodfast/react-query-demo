@@ -57,6 +57,7 @@ const CharacterListPage: FC = () => {
             <button onClick={handleClickPrev} disabled={!data.info.prev}>
               Prev
             </button>
+            <span>{` ${page} `}</span>
             <button onClick={handleClickNext} disabled={!data.info.next}>
               Next
             </button>
