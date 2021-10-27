@@ -15,7 +15,7 @@ const CharacterListPage: FC = () => {
   const parsed = queryString.parse(search);
   const page: number = parseInt(parsed.page as string) || 1;
 
-  const { isLoading, isError, data } = useCharacterList({ page });
+  const { isLoading, isFetching, isError, data } = useCharacterList({ page });
 
   const handleClickPrev = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
@@ -54,11 +54,17 @@ const CharacterListPage: FC = () => {
         <div>
           <CharacterList list={data.results} />
           <div>
-            <button onClick={handleClickPrev} disabled={!data.info.prev}>
+            <button
+              onClick={handleClickPrev}
+              disabled={isFetching || !data.info.prev}
+            >
               Prev
             </button>
             <span>{` ${page} `}</span>
-            <button onClick={handleClickNext} disabled={!data.info.next}>
+            <button
+              onClick={handleClickNext}
+              disabled={isFetching || !data.info.next}
+            >
               Next
             </button>
           </div>
