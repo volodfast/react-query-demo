@@ -9,7 +9,7 @@ const Header: FC = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="characters">Characters</Link>
+          <Link to="/characters">Characters</Link>
         </li>
       </ul>
     </nav>
