@@ -7,6 +7,7 @@ import CharacterListPage from 'pages/CharacterListPage';
 import HomePage from 'pages/HomePage';
 import CharacterShowPage from 'pages/CharacterShowPage';
 import LocationListPage from 'pages/LocationListPage';
+import TestFormPage from 'pages/TestFormPage';
 
 const client = new QueryClient();
 
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/locations" exact>
             <LocationListPage />
+          </Route>
+          <Route path="/form" exact>
+            <TestFormPage />
           </Route>
         </Switch>
         <ReactQueryDevtools />

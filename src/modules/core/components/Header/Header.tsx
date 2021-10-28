@@ -14,6 +14,9 @@ const Header: FC = () => {
         <li>
           <Link to="/locations">Locations</Link>
         </li>
+        <li>
+          <Link to="/form">Form</Link>
+        </li>
       </ul>
     </nav>
   );
