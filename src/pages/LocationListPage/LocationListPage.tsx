@@ -1,16 +1,33 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
+// components
+import LocationList from 'modules/location/components/LocationList';
 // hooks
 import { useLocationList } from 'modules/location/hooks/useLocationList';
 // styles
 import { LocationListPageContainer } from './LocationListPage.styled';
 
 const LocationListPage: FC = () => {
-  const { data, fetchNextPage, isLoading, isError, hasNextPage } =
-    useLocationList();
+  const {
+    data,
+    fetchNextPage,
+    isLoading,
+    isFetching,
+    isFetchingNextPage,
+    isError,
+    hasNextPage,
+  } = useLocationList();
+
+  const locationList = useMemo(() => {
+    if (data?.pages) {
+      return data.pages.flatMap((page) => page.results);
+    }
+
+    return [];
+  }, [data]);
 
   return (
     <LocationListPageContainer>
-      <h1>Location List</h1>
+      <h1>Location List Page</h1>
 
       {isLoading ? (
         <p>Loading...</p>
@@ -18,18 +35,11 @@ const LocationListPage: FC = () => {
         <p>Error!</p>
       ) : data ? (
         <div>
-          {data.pages.map((page, i) => {
-            return page.results.map((location) => {
-              return (
-                <div key={location.id}>
-                  <div>Id: {location.id}</div>
-                  <div>Name: {location.name}</div>
-                  <div>Type: {location.type}</div>
-                </div>
-              );
-            });
-          })}
-          <button onClick={() => fetchNextPage()} disabled={!hasNextPage}>
+          <LocationList list={locationList} />
+          <button
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isFetching || isFetchingNextPage}
+          >
             Fetch Next
           </button>
         </div>
