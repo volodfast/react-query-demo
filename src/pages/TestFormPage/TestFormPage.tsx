@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { Prompt } from 'react-router';
 
 const TestFormPage: FC = () => {
   const [text, setText] = useState('');
@@ -15,6 +16,12 @@ const TestFormPage: FC = () => {
 
   return (
     <div>
+      <Prompt
+        when={!!text}
+        message={(location) =>
+          `You are going away from page ${location.pathname}. All the data in the form would be destroyed! Do you still want to go?`
+        }
+      />
       <h1>Test Form Page</h1>
 
       <form onSubmit={handleSubmit}>
