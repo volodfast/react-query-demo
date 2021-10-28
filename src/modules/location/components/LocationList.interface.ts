@@ -1,3 +1,3 @@
 export type LocationListProps = {
-  list: any[];
+  list: Location[];
 };
