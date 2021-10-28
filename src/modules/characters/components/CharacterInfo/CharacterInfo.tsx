@@ -22,7 +22,7 @@ const CharacterInfo: FC<CharacterInfoProps> = ({ character }) => {
       </div>
       <div>
         <span>Image: </span>
-        <img src={character.image} />
+        <img src={character.image} alt={`${character.name}`} />
       </div>
     </CharacterInfoContainer>
   );
