@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // interfaces
-import { LocationListProps } from './LocationList.interface';
+import { LocationListProps } from './LocationList.interfaces';
 // styles
 import { LocationListContainer } from './LocationList.styled';
 
