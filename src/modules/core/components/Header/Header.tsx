@@ -17,6 +17,9 @@ const Header: FC = () => {
         <li>
           <Link to="/form">Form</Link>
         </li>
+        <li>
+          <Link to="/form?hello=true">Form with search</Link>
+        </li>
       </ul>
     </nav>
   );
