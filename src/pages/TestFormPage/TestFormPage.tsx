@@ -1,13 +1,11 @@
 import React, { FC, useState } from 'react';
-import { Prompt, useHistory } from 'react-router';
+// components
+import PreventNavigationPrompt from 'modules/core/components/PreventNavigationPrompt';
 // styles
-import { Modal, ModalContainer } from './TestFormPage.styled';
+import { TestFormPageContainer } from './TestFormPage.styled';
 
 const TestFormPage: FC = () => {
-  const history = useHistory();
-
   const [text, setText] = useState('');
-  const [showModal, setShowModal] = useState(false);
 
   const handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
@@ -19,20 +17,9 @@ const TestFormPage: FC = () => {
     ev.preventDefault();
   };
 
-  console.log('showModal', showModal);
-
   return (
-    <div>
-      <Prompt
-        when={!!text}
-        message={(location, action) => {
-          const message = `You are going away from page ${location.pathname}. All the data in the form would be destroyed! Do you still want to go?`;
-
-          setShowModal(true);
-
-          return false;
-        }}
-      />
+    <TestFormPageContainer>
+      <PreventNavigationPrompt when={!!text} />
       <h1>Test Form Page</h1>
 
       <form onSubmit={handleSubmit}>
@@ -45,31 +32,7 @@ const TestFormPage: FC = () => {
 
         <button type="submit">Submit</button>
       </form>
-
-      <ModalContainer
-        style={{
-          display: showModal ? 'flex' : 'none',
-        }}
-        onClick={() => {
-          setShowModal(false);
-        }}
-      >
-        <Modal onClick={(ev: any) => ev.stopPropagation()}>
-          <h1>Do you want to leave page?</h1>
-
-          <button onClick={() => {}}>Yes</button>
-          <button
-            onClick={(ev: any) => {
-              ev.stopPropagation();
-
-              setShowModal(false);
-            }}
-          >
-            No
-          </button>
-        </Modal>
-      </ModalContainer>
-    </div>
+    </TestFormPageContainer>
   );
 };
 
