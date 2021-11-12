@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+// styles
+import { HeaderContainer, MenuList } from './Header.styled';
 
 const Header: FC = () => {
   return (
-    <nav>
-      <ul>
+    <HeaderContainer>
+      <MenuList>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -20,8 +22,8 @@ const Header: FC = () => {
         <li>
           <Link to="/form?hello=true">Form with search</Link>
         </li>
-      </ul>
-    </nav>
+      </MenuList>
+    </HeaderContainer>
   );
 };
 

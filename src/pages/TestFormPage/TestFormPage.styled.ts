@@ -1,3 +1,5 @@
 import styled from 'styled-components';
 
-export const TestFormPageContainer = styled.div``;
+export const TestFormPageContainer = styled.div`
+  text-align: center;
+`;
