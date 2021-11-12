@@ -40,12 +40,17 @@ const PreventNavigationPrompt: FC<PreventNavigationPromptProps> = (props) => {
   const [isNavigationAllowed, setIsNavigationAllowed] = useState(false);
 
   const handleNavigationAway = (
-    location: Location<unknown>,
+    routeLocation: Location<unknown>,
     action: Action
   ): string | boolean => {
+    // prevent modal to show when route is exactly the same
+    if (isSameRoute(location, routeLocation)) {
+      return true;
+    }
+
     if (!isNavigationAllowed) {
       setIsModalOpen(true);
-      nextLocation.current = location;
+      nextLocation.current = routeLocation;
       nextAction.current = action;
 
       return false;
@@ -66,12 +71,16 @@ const PreventNavigationPrompt: FC<PreventNavigationPromptProps> = (props) => {
     if (!isNavigationAllowed) {
       return;
     }
+
     if (!nextLocation.current) {
       console.error('Something wrong with the next location!');
 
       return;
     }
 
+    // close modal if route is the same
+    // may be happening after user redirects to the page
+    // and this components is not unmounted
     if (isSameRoute(location, nextLocation.current)) {
       setIsModalOpen(false);
       setIsNavigationAllowed(false);
